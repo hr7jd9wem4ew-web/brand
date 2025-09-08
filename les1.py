@@ -1,62 +1,64 @@
-# -----------------завдання 1-----------
+import random
 
-# text = ("Кава — один із найпопулярніших напоїв у світі. Вона дарує енергію, піднімає настрій і допомагає розпочати день. Дослідження показують, що помірне споживання кави може бути навіть корисним! Ви любите каву?")
-# count_dots=text.count(".")+text.count("?")+text.count("!")
-# print(f"Кількість речень в тексті: {count_dots}")
+users = []
+print("-----------Welcome-----------")
+print("""Список команд:
+        1 - Добавити учасника
+        2 - Видалити учасника
+        3 - Вибрати переможця
+        4 - Показати учасників
+        5 - зробити рандом чесним
+        6 - очистити список
+        7 - знайти переможця, але після перемоги видалити його зі списку
+        exit - завершити конкурс""")
 
-# -----------------завдання 2-----------
+while True:
+    answer = input("Введіть команду: ")
 
-# text = input("Введіть рядок: ")
-# if text == text[::-1]:
-#     print(f"{text} - це паліндром")
-# else:
-#     print(f"{text} - не паліндром")
+    if answer == "1":
+        user = input("Введіть учасника конкурсу: ")
+        if user.isalpha():
+            users.append(user.lower())
+            print(f"Список учасників: {users}")
+        else:
+            print("Неправильне ім'я. Користувача не додано.")
 
-# -----------------завдання 3-----------
+    elif answer == "2":
+        user = input("Введіть учасника, якого видалити зі списку: ")
+        if user in users:
+            users.remove(user)
+            print(f"Список учасників: {users}")
+        else:
+            print("Такого користувача немає у списку.")
 
-# text = input("Введіть текст: ")
-# reserved = "python itstep teacher student roman taras"
-# reservedlist = text.split()
-# for i in range(len(reservedlist)):
-#     if reservedlist[i].lower() in reserved:
-#         reservedlist[i] = reservedlist[i].upper()
-# result = " ".join(reservedlist)
-# print(f"{result}")
+    elif answer == "3":
+        if users:
+            print(f"Переможець конкурсу: {random.choice(users)}")
+        else:
+            print("Список порожній, нема з кого обирати.")
 
-# -----------------завдання 4-----------
+    elif answer == "4":
+        print(f"Список учасників: {users}")
 
-# text = input("Введіть рядок: ")
-# sumvol1 = input("Введіть перший символ: ")
-# sumvol2 = input("Введіть другий символ: ")
-# search1 = text.find(sumvol1)
-# search2 = text.find(sumvol2)
-# if search1 != -1 and search2 != -1 and search1 < search2:
-#     result = text[:search1] + text[search2+1:]
-# else:
-#     result = text
-# print(f"Результат: {result}")
+    elif answer == "5":
+        users = list(set(users))
+        print(f"{users}")
 
-# -----------------завдання 5-----------
+    elif answer == "6":
+        users.clear()
+        print("Список очищено!")
 
-# text = input("Введіть текст: ")
-# symbols = input("Введіть символи: ")
-# symbols_set = set(symbols)
-# words = text.split()
-# result_words = []
-# for i in words:
-#     f = False
-#     for c in i:
-#         if c in symbols_set:
-#             f = True
-#             break
-#     if not f:
-#         result_words.append(i)
-# result = " ".join(result_words)
-# print(f"Результат: {result}")
+    elif answer == "7":
+        if users:
+            winner = random.choice(users)
+            users.remove(winner)
+            print(f"Переможець конкурсу: {winner} (видалено зі списку)")
+        else:
+            print("Список порожній")
 
-# -----------------завдання 6-----------
+    elif answer == "exit":
+        print("Конкурс завершено.")
+        break
 
-# text = input("Введіть текст: ")
-# text1 = text.split()
-# result = " ".join(text1[::-1])
-# print(result)
+    else:
+        print("Неправильна команда. Спробуйте ще раз.")
